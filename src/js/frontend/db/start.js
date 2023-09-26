@@ -1,4 +1,5 @@
 const app = document.getElementById('app')
+const tablesList = document.getElementById('tablesList')
 
 const axios = require('axios');
 
@@ -11,13 +12,22 @@ const start = {
             .then(function (response) {
                 console.log(response.data)
       
-                const newParagraph = document.createElement('p')
+                const newItem = document.createElement('li')
 
-                response.data.forEach(names=>{
-                    newParagraph.textContent=names.name
+                response.data.map(names=>{
+                    newItem.classList.add('tablesListItem')
+                    newItem.textContent=names.name
                     console.log(names.name)
-                    app.appendChild(newParagraph.cloneNode(true))
+                    tablesList.appendChild(newItem.cloneNode(true))
                 })
+
+                const tablesListItems = ([...document.getElementsByClassName('tablesListItem')])
+                tablesListItems.map(item=>{
+                    item.addEventListener('click', ()=>{console.log(item.textContent)})
+                })
+
+                
+                console.log(document.getElementsByClassName('tablesListItem'))
               
 
             })

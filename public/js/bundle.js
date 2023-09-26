@@ -1,7 +1,7 @@
 /******/ (() => { // webpackBootstrap
-/******/ 	var __webpack_modules__ = ({
-
-/***/ 1:
+/******/ 	var __webpack_modules__ = ([
+/* 0 */,
+/* 1 */
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 console.log(`it's working...`)
@@ -9,13 +9,13 @@ console.log(`it's working...`)
 __webpack_require__(2)
 
 /***/ }),
-
-/***/ 2:
+/* 2 */
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 const app = document.getElementById('app')
+const tablesList = document.getElementById('tablesList')
 
-const axios = __webpack_require__(46);
+const axios = __webpack_require__(3);
 
 
 
@@ -26,13 +26,22 @@ const start = {
             .then(function (response) {
                 console.log(response.data)
       
-                const newParagraph = document.createElement('p')
+                const newItem = document.createElement('li')
 
-                response.data.forEach(names=>{
-                    newParagraph.textContent=names.name
+                response.data.map(names=>{
+                    newItem.classList.add('tablesListItem')
+                    newItem.textContent=names.name
                     console.log(names.name)
-                    app.appendChild(newParagraph.cloneNode(true))
+                    tablesList.appendChild(newItem.cloneNode(true))
                 })
+
+                const tablesListItems = ([...document.getElementsByClassName('tablesListItem')])
+                tablesListItems.map(item=>{
+                    item.addEventListener('click', ()=>{console.log(item.textContent)})
+                })
+
+                
+                console.log(document.getElementsByClassName('tablesListItem'))
               
 
             })
@@ -45,8 +54,7 @@ const start = {
 start.renderTablesList();
 
 /***/ }),
-
-/***/ 46:
+/* 3 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -3267,8 +3275,7 @@ module.exports = axios;
 
 
 /***/ })
-
-/******/ 	});
+/******/ 	]);
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
